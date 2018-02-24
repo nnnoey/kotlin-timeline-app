@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "316422277051",
+    "firebase_url": "https://twitterapp-868ea.firebaseio.com",
+    "project_id": "twitterapp-868ea",
+    "storage_bucket": "twitterapp-868ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316422277051:android:9464f4468a6039b1",
+        "android_client_info": {
+          "package_name": "com.example.noey.twitterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316422277051-0mvh1kvbcs6fkuks80v6imhrot0sd00a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noey.twitterapp",
+            "certificate_hash": "a9fb052ee29f09d677e0e4d42132b9f4067158d1"
+          }
+        },
+        {
+          "client_id": "316422277051-aub3ttd4jddj0iut3etmh3b39sq8p050.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6CMG1QFFKYH8rD7_DE6bgWAf-kfhODY0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316422277051-aub3ttd4jddj0iut3etmh3b39sq8p050.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

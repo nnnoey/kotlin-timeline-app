@@ -1,5 +1,6 @@
 package com.example.noey.twitterapp
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -9,6 +10,7 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -19,7 +21,7 @@ class LoginActivity : AppCompatActivity(){
 
     val REQUEST_CODE_PERMISSION_IMG = 111
     val REQUEST_CODE_PICK_IMG = 222
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -65,7 +67,7 @@ class LoginActivity : AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == REQUEST_CODE_PICK_IMG && data != null){
+        if(requestCode == REQUEST_CODE_PICK_IMG && data != null && resultCode == Activity.RESULT_OK){
             val selectedImage = data.data
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
             val cursor = contentResolver.query(selectedImage, filePathColumn, null, null, null)
