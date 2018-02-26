@@ -64,7 +64,7 @@
                 android:src="@drawable/persoicon" />
 
             <TextView
-                android:id="@+id/txtUserName"
+                android:id="@+id/txt_user"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -126,7 +126,7 @@
             android:src="@drawable/tweets"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:id="@+id/tweet_picture"
+            android:id="@+id/img_tweet"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -151,7 +151,7 @@
 
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/iv_share"
+                android:id="@+id/img_share"
                 android:layout_marginRight="8dp"
                 android:background="@drawable/ic_favorite_border_black_24dp" />
 

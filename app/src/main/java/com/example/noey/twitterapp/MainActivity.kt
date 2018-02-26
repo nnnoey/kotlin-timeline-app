@@ -12,15 +12,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.noey.twitterapp.model.PostInfo
 import com.example.noey.twitterapp.model.Ticket
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_ticket.view.*
+import kotlinx.android.synthetic.main.tweets_ticket.*
+import kotlinx.android.synthetic.main.tweets_ticket.view.*
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     var email:String?=null
     var uid:String?=null
     var downloadUrl:String?=""
+
+    var adapter:MyTweetAdpater?=null
 
     private var firebaseDatabase = FirebaseDatabase.getInstance()
     private var firebaseDbRef= firebaseDatabase.reference
@@ -47,8 +56,10 @@ class MainActivity : AppCompatActivity() {
         listTweets.add(Ticket("0", "him", "url", "uid"))
         listTweets.add(Ticket("1", "her", "url", "uid"))
 
-        var adapter = MyTweetAdpater(this, listTweets)
+        adapter = MyTweetAdpater(this, listTweets)
         listviewTweets.adapter = adapter
+
+        loadPost()
     }
 
     private fun loadImage() {
@@ -100,7 +111,40 @@ class MainActivity : AppCompatActivity() {
 
     fun splitString(email: String):String{
         val split = email.split("@")
+
         return split[0]
+    }
+
+    fun loadPost(){
+        firebaseDbRef.child("posts").addValueEventListener(object: ValueEventListener{
+
+            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                try {
+                    var data = dataSnapshot!!.value as HashMap<String, Any>
+
+                    listTweets.clear()
+                    listTweets.add(Ticket("0", "him", "url", "add"))
+
+                    for (key in data.keys){
+                        var post = data[key] as HashMap<String, Any>
+
+                        listTweets.add(Ticket(key,
+                                post["text"] as String,
+                                post["postImage"] as String,
+                                post["userUID"] as String))
+                    }
+
+                    adapter!!.notifyDataSetChanged()
+
+                } catch (ex: Exception){
+
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
     }
 
     inner class  MyTweetAdpater: BaseAdapter {
@@ -135,6 +179,15 @@ class MainActivity : AppCompatActivity() {
 
             } else{
                 var myView=layoutInflater.inflate(R.layout.tweets_ticket,null)
+
+                myView.txt_user.setText(mytweet.tweetPersonUID)
+                myView.txt_tweet.setText(mytweet.tweetText)
+
+                Glide.with(context)
+                        .load(mytweet.tweetImageURL)
+                        .into(myView.img_tweet)
+
+
                 return myView
             }
         }
