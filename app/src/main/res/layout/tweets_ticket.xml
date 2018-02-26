@@ -50,7 +50,7 @@
             android:paddingRight="3dp">
 
             <ImageView
-                android:id="@+id/picture_path"
+                android:id="@+id/img_profile"
                 android:layout_width="50px"
                 android:layout_height="50px"
                 android:layout_alignBottom="@+id/txtflollower"

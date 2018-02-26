@@ -187,6 +187,34 @@ class MainActivity : AppCompatActivity() {
                         .load(mytweet.tweetImageURL)
                         .into(myView.img_tweet)
 
+                firebaseDbRef.child("users").child(mytweet.tweetPersonUID)
+                        .addValueEventListener(object: ValueEventListener{
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                        try {
+                            var data = dataSnapshot!!.value as HashMap<String, Any>
+
+                            for (key in data.keys){
+                                var userInfo = data[key] as String
+                                if(key.equals("profile_image")){
+                                    Glide.with(context)
+                                            .load(userInfo)
+                                            .into(myView.img_profile)
+
+                                }else{
+                                    myView.txt_user.text = userInfo
+                                }
+                            }
+                        } catch (ex: Exception){
+
+                        }
+                    }
+
+                    override fun onCancelled(p0: DatabaseError?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                })
+
 
                 return myView
             }
