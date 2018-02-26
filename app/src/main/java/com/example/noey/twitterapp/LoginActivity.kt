@@ -140,6 +140,7 @@ class LoginActivity : AppCompatActivity(){
 
         imgProfile.isDrawingCacheEnabled = true
         imgProfile.buildDrawingCache()
+        //change image to bitmap
         val drawable = imgProfile.drawable as BitmapDrawable
         val bitmap = drawable.bitmap
         val byteArrayOutputStream = ByteArrayOutputStream()

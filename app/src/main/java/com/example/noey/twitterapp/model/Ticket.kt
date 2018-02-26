@@ -1,4 +1,4 @@
-package com.example.noey.twitterapp
+package com.example.noey.twitterapp.model
 
 class Ticket {
     var tweetID: String? = null
